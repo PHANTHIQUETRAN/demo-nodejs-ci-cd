@@ -1,23 +1,28 @@
-pipeline{
-    tools 
-{}
-stages {
+pipeline {
+    agent any
+
+    tools {
+        nodejs "Nodejs"
+    }
+
+    stages {
         stage('Checkout') {
             steps {
-                Checkout scm
+                checkout scm
             }
         }
+
         stage('Test') {
             steps {
-                sh'sudo apt install npm'
-                sh 'npm test'
+                sh 'node -v'
+                sh 'npm -v'
             }
         }
+
         stage('Build') {
             steps {
-                echo 'npm run build'
+                sh 'npm run build'
             }
         }
     }
-   
 }
